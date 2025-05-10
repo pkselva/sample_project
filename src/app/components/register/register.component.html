@@ -1,0 +1,40 @@
+<section class="w-full flex gap-10 items-center justify-center mx-auto sm:px-10 h-[100vh] bg-sky-50">
+    <div class="sm:flex sm:flex-col sm:gap-5 sm:items-center hidden">
+        <img src="/bank_image1.jpg" alt="img" class="w-125 rounded-2xl shadow">
+    </div>
+    <div class="flex flex-col items-center text-end gap-8 ">
+        <div>
+            <h1 class="text-3xl font-bold text-sky-400">Hi, Join Us</h1>
+        </div>
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="w-60 lg:w-80 flex flex-col gap-2 text-sm">
+            <input type="text" name="orgCode" [(ngModel)]="orgCode" required placeholder="Organization Code"
+                minlength="1" maxlength="255" class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35">
+            <input type="text" name="loginId" [(ngModel)]="loginId" required placeholder="Login ID" minlength="1"
+                maxlength="255" class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35">
+            <input [type]="showPassword?'password':'text'" name="keyword" [(ngModel)]="keyword" required
+                placeholder="Password" minlength="1" maxlength="255"
+                class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35">
+            <input [type]="showPassword?'password':'text'" name="keyword" [(ngModel)]="confirmKeyword" required
+                placeholder="Confirm Password" minlength="1" maxlength="255"
+                class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35">
+            <div class="text-sm opacity-35 flex justify-start mx-3">
+                <label class="flex items-center gap-1 text-xs">
+                    <input type="checkbox" (click)="togglePasswordVisibility()">{{showPassword?'Show':'Hide'}} Password
+                </label>
+            </div>
+            <button type="submit"
+                class="p-2 rounded-full shadow bg-sky-500 text-white hover:cursor-pointer disabled:bg-sky-300 disabled:cursor-not-allowed"
+                [disabled]="!registerForm.valid">
+                Register
+            </button>
+            <div class="flex justify-center text-sm gap-1">
+                <p class="opacity-35">Already have account?</p>
+                <button [routerLink]="'/login'" class="text-sky-500">Login</button>
+            </div>
+        </form>
+        <div [class]="error?'bg-red-100 rounded text-red-500 p-2 text-xs opacity-80':''">
+            {{error}}
+        </div>
+    </div>
+</section>
+<router-outlet></router-outlet>
