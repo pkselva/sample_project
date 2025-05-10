@@ -1,24 +1,24 @@
 <div class="lg:mx-20">
     <h1 class="text-xl text-sky-800 font-medium my-5">Party &amp; User Registeration</h1>
-    <form action="" class="flex flex-col gap-5 text-gray-500">
+    <form #onboardingForm="ngForm" (ngSubmit)="onSubmit(onboardingForm)" class="flex flex-col gap-5 text-gray-500">
         <div class="p-10 bg-sky-50 shadow rounded-xl">
             <h1 class="mb-3 text-sky-800 text-shadow-md font-medium">Party Information</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="flex flex-col gap-1">
                     <label class="text-xs" for="partyCode">Party Code</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <input type="text" name="partyCode" [(ngModel)]="partyCode" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
                 <div class="flex flex-col gap-1">
                     <label class="text-xs" for="partyName">Party Name</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <input type="text" name="partyName" [(ngModel)]="partyName" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs" for="emailAddress">Email Address</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <label class="text-xs" for="partyEmail">Email Address</label>
+                    <input type="email" name="partyEmail" [(ngModel)]="partyEmail" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs" for="mobileNumber">Mobile Number</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <label class="text-xs" for="partyMobile">Mobile Number</label>
+                    <input type="number" name="partyMobile" [(ngModel)]="partyMobile" minlength="10" maxlength="10" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
             </div>
         </div>
@@ -27,23 +27,23 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="flex flex-col gap-1">
                     <label class="text-xs" for="firstName">First Code</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <input type="text" name="firstName" [(ngModel)]="firstName" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
                 <div class="flex flex-col gap-1">
                     <label class="text-xs" for="lastName">Last Name</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <input type="text" name="lastName" [(ngModel)]="lastName" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
                 <div class="flex flex-col gap-1">
                     <label class="text-xs" for="userId">User ID</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <input type="text" name="userId" [(ngModel)]="userId" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs" for="emailAddress">Email Address</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <label class="text-xs" for="userEmail">Email Address</label>
+                    <input type="email" name="userEmail" [(ngModel)]="userEmail" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-xs" for="mobileNumber">Mobile Number</label>
-                    <input type="text" placeholder=" " class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+                    <label class="text-xs" for="userMobile">Mobile Number</label>
+                    <input type="number" name="userMobile" [(ngModel)]="userMobile" minlength="10" maxlength="10" class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
                 </div>
             </div>
         </div>

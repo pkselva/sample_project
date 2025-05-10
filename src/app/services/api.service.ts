@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,9 +8,10 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl = 'http://172.16.16.49:7055/v1/trade'
+  // private baseUrl = 'http://172.16.16.49:7055/v1/trade'
+  private baseUrl = 'http://localhost:7000/v1/trade'
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   login(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/signIn`, data);
@@ -22,6 +23,13 @@ export class ApiService {
 
   authorize(token: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/authenticate/token`, token);
+  }
+
+  createparty(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
+    })
+    return this.http.post(`${this.baseUrl}/onboarding/submit`, data, { headers });
   }
 
 }
