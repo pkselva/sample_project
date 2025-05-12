@@ -1,0 +1,11 @@
+.mat-mdc-table {
+    min-width: 100%;
+    border: 0;
+    border-spacing: 0;
+    table-layout: auto;
+    white-space: normal;
+    background-color: white;
+}
+.mat-mdc-table tbody, .mat-mdc-table tfoot, .mat-mdc-table thead, .mat-mdc-cell, .mat-mdc-footer-cell, .mat-mdc-header-row, .mat-mdc-row, .mat-mdc-footer-row, .mat-mdc-table .mat-mdc-header-cell {
+    background: inherit;
+}

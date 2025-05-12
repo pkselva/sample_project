@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  // private baseUrl = 'http://172.16.16.49:7055/v1/trade'
-  private baseUrl = 'http://localhost:7000/v1/trade'
+  private baseUrl = 'http://172.16.16.49:7055/v1/trade'
+  // private baseUrl = 'http://localhost:7000/v1/trade'
 
   constructor(private http: HttpClient) { }
 
@@ -28,8 +28,15 @@ export class ApiService {
   createparty(data: any): Observable<any> {
     const headers = new HttpHeaders({
       "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    })
+    });
     return this.http.post(`${this.baseUrl}/onboarding/submit`, data, { headers });
+  }
+
+  getUsers(pagination: any): Observable<any> {
+    const headers = new HttpHeaders({
+      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
+    });
+    return this.http.post<any>(`${this.baseUrl}/user/list`, pagination, { headers });
   }
 
 }

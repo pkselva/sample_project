@@ -43,10 +43,8 @@
                 </li>
             </ul>
         </section>
-
-        <!-- Overlay for mobile -->
-        <div class="fixed bg-opacity-50 z-[9] md:hidden duration-300" (click)="isSidebarOpen = false">
-        </div>
+        
+        <div class="fixed bg-opacity-50 z-[9] md:hidden duration-300" (click)="isSidebarOpen = false"></div>
 
         <main class="bg-white md:w-[calc(100vw-16rem)] w-full p-5 md:ms-[16rem]">
             <router-outlet></router-outlet>

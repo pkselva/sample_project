@@ -12,6 +12,8 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     HttpClientModule,
     MatButtonModule,
     MatIconModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTableModule,
+    MatPaginator
   ],
   providers: [],
   bootstrap: [AppComponent]
