@@ -23,6 +23,8 @@ export class CreatePartyComponent {
 
   onSubmit(onboardingForm: NgForm) {
 
+    console.log(onboardingForm.value)
+
     if (onboardingForm.valid) {
       const formValues = onboardingForm.value;
 

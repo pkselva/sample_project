@@ -7,16 +7,32 @@
             <h1 class="text-3xl font-bold text-sky-400">Welcome, Back</h1>
         </div>
         <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="w-60 lg:w-80 flex flex-col gap-2 text-sm">
-            <input type="text" name="orgCode" [(ngModel)]="orgCode" required placeholder="Organization Code "
-                minlength="1" maxlength="255" class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35 placeholder:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="text" name="loginId" [(ngModel)]="loginId" required placeholder="Login ID" minlength="1"
-                maxlength="255" class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35 placeholder:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input [type]="showPassword?'password':'text'" name="keyword" [(ngModel)]="keyword" required
-                placeholder="Password" minlength="1"
-                class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35 placeholder:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" name="orgCode" #orgCodeRef="ngModel" [(ngModel)]="orgCode" required
+                placeholder="Organization Code" minlength="1" maxlength="255"
+                [ngClass]="{'ring-red-500 ring-2': orgCodeRef.invalid && orgCodeRef.touched,'focus:ring-blue-500': !(orgCodeRef.invalid && orgCodeRef.touched)}"
+                class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35 placeholder:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <p *ngIf="orgCodeRef.touched && orgCodeRef.errors?.['required']" style="color:red; margin:0; font-size: xx-small;">
+                Organization Code is Required
+            </p>
+            <input type="text" name="loginId" [(ngModel)]="loginId" #loginIdRef="ngModel" required minlength="1"
+                maxlength="255" placeholder="Login ID"
+                [ngClass]="{'ring-red-500 ring-2': loginIdRef.invalid && loginIdRef.touched,'focus:ring-blue-500': !(loginIdRef.invalid && loginIdRef.touched)}"
+                class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <p *ngIf="loginIdRef.touched && loginIdRef.errors?.['required']" style="color:red; margin:0; font-size: xx-small;">
+                Login ID is Required
+            </p>
+            <input [type]="showPassword ? 'text' : 'password'" name="keyword" [(ngModel)]="keyword" #keywordRef="ngModel"
+                required minlength="1" placeholder="Password"
+                [ngClass]="{'ring-red-500 ring-2': keywordRef.invalid && keywordRef.touched,'focus:ring-blue-500': !(keywordRef.invalid && keywordRef.touched)}"
+                class="py-2 px-4 shadow rounded-full bg-white placeholder:opacity-35 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <p *ngIf="keywordRef.touched && keywordRef.errors?.['required']" style="color:red; margin:0; font-size: xx-small;">
+                Password is Required
+            </p>
+
             <div class="text-sm opacity-35 flex justify-start mx-3">
                 <label class="flex items-center gap-1 text-xs">
-                    <input type="checkbox" (click)="togglePasswordVisibility()">{{showPassword?'Show':'Hide'}} Password
+                    <input type="checkbox" (click)="togglePasswordVisibility()" />{{showPassword?'Show':'Hide'}}
+                    Password
                 </label>
             </div>
             <button type="submit"

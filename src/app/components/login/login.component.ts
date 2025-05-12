@@ -25,10 +25,7 @@ export class LoginComponent {
 
     console.log(loginForm.value)
 
-    if (this.orgCode.trim().length === 0 || this.loginId.trim().length === 0 || this.keyword.trim().length === 0) {
-      this.error = "All Fields are Required"
-    }
-    else if (loginForm.valid) {
+    if (loginForm.valid) {
       const data = {
         orgCode: this.orgCode,
         loginId: this.loginId,
