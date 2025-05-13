@@ -9,7 +9,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrl: './list-party.component.css'
 })
 export class ListPartyComponent {
-  displayedColumns: string[] = ['PARTY_NAME', 'ACTIVE_CODE', 'PARTY_CODE', 'MOBILE_NUMBER', 'actions'];
+  displayedColumns: string[] = ['PARTY_NAME', 'PARTY_CODE', 'EMAIL_ADDRESS', 'MOBILE_NUMBER', 'actions'];
   
     userList: any[] = [];
     pageSize: any = 5;
@@ -50,7 +50,7 @@ export class ListPartyComponent {
   
       this.apiService.getParties(payload).subscribe({
         next: (res) => {
-          this.userList = res.usersList;
+          this.userList = res.partiesList;
         },
         error: (err) => {
           console.log(err);

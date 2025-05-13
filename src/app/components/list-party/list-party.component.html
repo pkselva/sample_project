@@ -3,13 +3,8 @@
   <table mat-table [dataSource]="userList">
 
     <ng-container matColumnDef="PARTY_NAME">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <th mat-header-cell *matHeaderCellDef>Party Name</th>
       <td mat-cell *matCellDef="let user"> {{user.PARTY_NAME}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="ACTIVE_CODE">
-      <th mat-header-cell *matHeaderCellDef>User ID</th>
-      <td mat-cell *matCellDef="let user"> {{user.ACTIVE_CODE}} </td>
     </ng-container>
 
     <ng-container matColumnDef="PARTY_CODE">
@@ -17,8 +12,13 @@
       <td mat-cell *matCellDef="let user"> {{user.PARTY_CODE}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="EMAIL_ADDRESS">
+      <th mat-header-cell *matHeaderCellDef>Email Address</th>
+      <td mat-cell *matCellDef="let user"> {{user.EMAIL_ADDRESS}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="MOBILE_NUMBER">
-      <th mat-header-cell *matHeaderCellDef>Party Name</th>
+      <th mat-header-cell *matHeaderCellDef>Mobile Number</th>
       <td mat-cell *matCellDef="let user"> {{user.MOBILE_NUMBER}} </td>
     </ng-container>
 
