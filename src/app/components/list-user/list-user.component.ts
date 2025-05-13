@@ -16,11 +16,12 @@ interface User {
   styleUrl: './list-user.component.css'
 })
 export class ListUserComponent implements OnInit {
-  displayedColumns: string[] = ['PARTY_NAME', 'ACTIVE_CODE', 'PARTY_CODE', 'MOBILE_NUMBER', 'actions'];
+  displayedColumns: string[] = ['PARTY_NAME', 'PARTY_CODE', 'LAST_UPDATED_ON','ACTIVE_CODE', 'actions'];
 
   userList: any[] = [];
-  pageSize: any = 5;
+  pageSize: any = 10;
   pageIndex: any = 0;
+date: any;
 
   constructor(private apiService: ApiService) { }
 

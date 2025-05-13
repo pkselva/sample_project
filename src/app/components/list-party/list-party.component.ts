@@ -12,7 +12,7 @@ export class ListPartyComponent {
   displayedColumns: string[] = ['PARTY_NAME', 'PARTY_CODE', 'EMAIL_ADDRESS', 'MOBILE_NUMBER', 'actions'];
   
     userList: any[] = [];
-    pageSize: any = 5;
+    pageSize: any = 10;
     pageIndex: any = 0;
   
     constructor(private apiService: ApiService) { }
