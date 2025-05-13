@@ -6,15 +6,17 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guard/auth.guard';
 import { CreatePartyComponent } from './components/create-party/create-party.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
+import { ListPartyComponent } from './components/list-party/list-party.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [AuthGuard],  
+    // canActivate: [AuthGuard],  
     children: [
       { path: '', redirectTo: 'userlist', pathMatch: 'full' },
       { path: 'userlist', component: ListUserComponent },
+      { path: 'partylist', component: ListPartyComponent },
       { path: 'createparty', component: CreatePartyComponent },
     ]
   },

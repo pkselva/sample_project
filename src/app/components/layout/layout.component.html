@@ -41,9 +41,16 @@
                         List Users
                     </a>
                 </li>
+                <li>
+                    <a class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-200"
+                        [routerLink]="['partylist']" routerLinkActive="bg-sky-100 text-sky-800 font-medium"
+                        (click)="isSidebarOpen = false">
+                        List Customers
+                    </a>
+                </li>
             </ul>
         </section>
-        
+
         <div class="fixed bg-opacity-50 z-[9] md:hidden duration-300" (click)="isSidebarOpen = false"></div>
 
         <main class="bg-white md:w-[calc(100vw-16rem)] w-full p-5 md:ms-[16rem]">

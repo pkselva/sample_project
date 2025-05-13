@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { ListPartyComponent } from './components/list-party/list-party.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatPaginator } from '@angular/material/paginator';
     RegisterComponent,
     LayoutComponent,
     CreatePartyComponent,
-    ListUserComponent
+    ListUserComponent,
+    ListPartyComponent
   ],
   imports: [
     BrowserModule,
