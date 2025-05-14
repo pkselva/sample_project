@@ -45,14 +45,9 @@
         </mat-menu>
       </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
-
   </table>
-
-  <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[length, 25, 10, 5]"
-    aria-label="Select page" (page)="onPageChange($event)">
+  <mat-paginator [pageSizeOptions]="[10, 5, 25, length]" aria-label="Select page">
   </mat-paginator>
-
 </div>

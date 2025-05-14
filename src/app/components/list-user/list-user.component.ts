@@ -1,13 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ApiService } from '../../services/api.service';
-
-interface User {
-  name: string;
-  userId: number;
-  partyCode: string;
-  partyName: string;
-}
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-list-user',
@@ -15,21 +10,20 @@ interface User {
   templateUrl: './list-user.component.html',
   styleUrl: './list-user.component.css'
 })
-export class ListUserComponent implements OnInit {
-  displayedColumns: string[] = ['PARTY_NAME', 'PARTY_CODE', 'LAST_UPDATED_ON','ACTIVE_CODE', 'actions'];
+export class ListUserComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['PARTY_NAME', 'PARTY_CODE', 'LAST_UPDATED_ON', 'ACTIVE_CODE', 'actions'];
 
-  userList: any[] = [];
-  pageSize: any = 10;
-  pageIndex: any = 0;
-date: any;
+  faEllipsisVertical = faEllipsisVertical;
+
+  userList = new MatTableDataSource<any>();
+  length: any = "";
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private apiService: ApiService) { }
 
-  onPageChange(e: PageEvent) {
-    console.log(e)
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
-    this.fetchUsers();
+  ngAfterViewInit(): void {
+    this.userList.paginator = this.paginator
   }
 
   ngOnInit(): void {
@@ -47,8 +41,8 @@ date: any;
         }
       ],
       pagination: {
-        pageSize: this.pageSize,
-        pageIndex: this.pageIndex
+        pageSize: 1000,
+        pageIndex: 0
       },
       sorting: {
         key: "createdOn",
@@ -58,7 +52,8 @@ date: any;
 
     this.apiService.getUsers(payload).subscribe({
       next: (res) => {
-        this.userList = res.usersList;
+        this.userList.data = res.usersList;
+        this.length = res.totalCount;
       },
       error: (err) => {
         console.log(err);

@@ -38,7 +38,8 @@
       <td mat-cell *matCellDef="let user">
         <button mat-button [matMenuTriggerFor]="menu"><fa-icon [icon]="faEllipsisVertical"></fa-icon></button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item [routerLink]="['edituser']" [queryParams]="{ name: user.PARTY_NAME, id: user.PARTY_CODE, email: user.EMAIL_ADDRESS, no: user.MOBILE_NUMBER }">
+          <button mat-menu-item [routerLink]="['edituser']"
+            [queryParams]="{ name: user.PARTY_NAME, id: user.PARTY_CODE, email: user.EMAIL_ADDRESS, no: user.MOBILE_NUMBER }">
             <mat-icon>edit</mat-icon>
             <span>EDIT</span>
           </button>
@@ -53,45 +54,6 @@
 
   </table>
 
-  <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[length, 25, 10, 5]"
-    aria-label="Select page" (page)="onPageChange($event)">
+  <mat-paginator [pageSizeOptions]="[10, 5, 25, 100, length]" aria-label="Select page">
   </mat-paginator>
-
 </div>
-
-<!-- <div class="overflow-x-auto lg:mx-20">
-  <h1 class="text-xl text-sky-800 font-medium my-5">User List</h1>
-  <table class="min-w-full w-full mb-4 text-sm md:text-base text-gray-700">
-    <thead class="bg-sky-100 text-sky-700">
-      <tr>
-        <th class="border border-gray-400 p-2 font-medium">#</th>
-        <th class="border border-gray-400 p-2 font-medium">Name</th>
-        <th class="border border-gray-400 p-2 font-medium">UserID</th>
-        <th class="border border-gray-400 p-2 font-medium">Email Address</th>
-        <th class="border border-gray-400 p-2 font-medium">Mobile Number</th>
-        <th class="border border-gray-400 p-2 font-medium">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of dataSource; let index = index" class="hover:bg-sky-50">
-        <td class="border border-gray-400 p-2">{{ index + 1 + currentPage * pageSize }}</td>
-        <td class="border border-gray-400 p-2">{{ user.firstName }} {{ user.lastName }}</td>
-        <td class="border border-gray-400 p-2">{{ user.userId }}</td>
-        <td class="border border-gray-400 p-2">{{ user.emailAddress }}</td>
-        <td class="border border-gray-400 p-2">{{ user.mobileNumber }}</td>
-        <td class="border border-gray-400 p-2">
-          <button mat-button [matMenuTriggerFor]="menu"><fa-icon [icon]="faEllipsisVertical"></fa-icon></button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item
-              [routerLink]="['user']" [queryParams]="{ fname: user.firstName, lname: user.lastName, id: user.userId,email: user.emailAddress, no: user.mobileNumber }">
-              <mat-icon>edit</mat-icon>
-              <span>EDIT</span>
-            </button>
-            <button mat-menu-item><mat-icon>delete_forever</mat-icon>
-              <span>DELETE</span></button>
-          </mat-menu>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->

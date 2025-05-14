@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-list-party',
@@ -9,51 +10,27 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './list-party.component.html',
   styleUrl: './list-party.component.css'
 })
-export class ListPartyComponent {
+export class ListPartyComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['PARTY_NAME', 'PARTY_CODE', 'EMAIL_ADDRESS', 'MOBILE_NUMBER', 'actions'];
 
   faEllipsisVertical = faEllipsisVertical;
-  userList: any[] = [];
-  pageSize: any = 0;
-  pageIndex: any = 0;
-  length: any;
+
+  userList = new MatTableDataSource<any>();
+  length: any = "";
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private apiService: ApiService) { }
 
-  onPageChange(e: PageEvent) {
-    console.log(e)
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
-    const payload = {
-      entityTypeCode: "API_GW_PARTY",
-      filters: [
-        {
-          key: "activeCode",
-          operator: "eq",
-          value: "ACTIVE"
-        }
-      ],
-      pagination: {
-        pageSize: this.pageSize,
-        pageIndex: this.pageIndex
-      },
-      sorting: {
-        key: "createdOn",
-        value: "asc"
-      }
-    }
-
-    this.apiService.getParties(payload).subscribe({
-      next: (res) => {
-        this.userList = res.partiesList;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+  ngAfterViewInit(): void {
+    this.userList.paginator = this.paginator
   }
 
   ngOnInit(): void {
+    this.fetchUsers();
+  }
+
+  fetchUsers() {
     const payload = {
       entityTypeCode: "API_GW_PARTY",
       filters: [
@@ -75,11 +52,12 @@ export class ListPartyComponent {
 
     this.apiService.getParties(payload).subscribe({
       next: (res) => {
-        this.userList = res.partiesList;
+        this.userList.data = res.partiesList;
         this.length = res.totalCount;
       },
       error: (err) => {
         console.log(err);
+        alert(err.message)
       }
     })
   }
