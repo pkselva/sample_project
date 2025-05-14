@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanActivateFn, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -7,22 +8,23 @@ import { CanActivate, CanActivateFn, Router } from '@angular/router';
 
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private jwtHelper: JwtHelperService) { }
   
   canActivate(): boolean {
-    const isLoggedIn = !!localStorage.getItem('token');
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
-      return true;
-    } else {
+    const token = localStorage.getItem('token');
+
+    console.log(token);
+    if (!token) {
       this.router.navigate(['/login']);
       return false;
     }
+
+    if(this.jwtHelper.isTokenExpired(token)){
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+      return false;
+    }
+
+    return true;
   }
 };
-
-// export const authGuard: CanActivateFn = () => {
-//   const isLoggedIn = !!localStorage.getItem('token')
-//   console.log(isLoggedIn); 
-//   return isLoggedIn;
-// };

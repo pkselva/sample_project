@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'createparty', pathMatch: 'full' },
       { path: 'userlist', component: ListUserComponent },
