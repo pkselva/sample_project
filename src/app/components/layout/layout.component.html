@@ -2,7 +2,7 @@
     <nav
         class="flex items-center px-5 py-2 justify-between fixed top-0 w-full h-16 z-50 bg-sky-100 text-sky-800 shadow">
         <div class="sm:flex flex sm:gap-5 gap-2 h-16 items-center">
-            <button class="md:hidden z-20 p-2 rounded-md bg-white hover:bg-sky-100"
+            <button class="md:hidden z-20 p-2 rounded-md bg-white hover:bg-sky-50"
                 (click)="isSidebarOpen = !isSidebarOpen">
                 <fa-icon [icon]="faEllipsisVertical" class="px-2 text-sky-800"></fa-icon>
             </button>
@@ -24,7 +24,7 @@
     </nav>
     <div class="flex">
         <section
-            class="fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-white shadow-lg border-r border-gray-200 p-4 z-10 transition-all duration-300"
+            class="fixed top-16 left-0 w-64 h-full bg-white shadow-lg border-r border-gray-200 p-4 z-10 transition-all duration-300"
             [class]="isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'">
             <ul class="flex flex-col gap-2">
                 <li>

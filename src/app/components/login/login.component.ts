@@ -17,14 +17,13 @@ export class LoginComponent {
   keyword = '';
   error = '';
 
-  showPassword = true;
+  showPassword = false;
 
   constructor(private apiService: ApiService, private router: Router) { }
 
   onSubmit(loginForm: NgForm) {
 
-    console.log(loginForm.value)
-
+    console.log(loginForm)
     if (loginForm.valid) {
       const data = {
         orgCode: this.orgCode,
@@ -50,5 +49,5 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
-    
+
 }
