@@ -15,6 +15,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ListPartyComponent } from './components/list-party/list-party.component';
+import { DialogModule } from '@angular/cdk/dialog';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { EditPartyComponent } from './components/edit-party/edit-party.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { ListPartyComponent } from './components/list-party/list-party.component
     LayoutComponent,
     CreatePartyComponent,
     ListUserComponent,
-    ListPartyComponent
+    ListPartyComponent,
+    EditUserComponent,
+    EditPartyComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,9 @@ import { ListPartyComponent } from './components/list-party/list-party.component
     MatIconModule,
     FontAwesomeModule,
     MatTableModule,
-    MatPaginator
+    MatPaginator,
+    DialogModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

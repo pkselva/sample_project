@@ -11,18 +11,28 @@ export class ApiService {
   private baseUrl = 'http://172.16.16.49:7055/v1/trade'
   // private baseUrl = 'http://localhost:7000/v1/trade'
 
-  constructor(private http: HttpClient) { }
+  token = localStorage.getItem('token')
+
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/signIn`, data);
+
+    return this.http.post(`${this.baseUrl}/signIn`, data,);
   }
 
   logout(token: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/signOut`, token);
+    const headers = new HttpHeaders({
+      "Authorization": `${this.token}`
+    });
+    return this.http.post(`${this.baseUrl}/signOut`, token, { headers });
   }
 
   authorize(token: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/authenticate/token`, token);
+    const headers = new HttpHeaders({
+      "Authorization": `${this.token}`
+    });
+    return this.http.post(`${this.baseUrl}/authenticate/token`, token, { headers });
   }
 
   createparty(data: any): Observable<any> {
@@ -45,4 +55,26 @@ export class ApiService {
     });
     return this.http.post<any>(`${this.baseUrl}/customer/list`, pagination, { headers });
   }
+
+  editUser(payload: any): Observable<any> {
+    const headers = new HttpHeaders({
+      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
+    });
+    return this.http.post<any>(`${this.baseUrl}/user/modify`, payload, { headers });
+  }
+
+  editParty(payload: any): Observable<any> {
+    const headers = new HttpHeaders({
+      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
+    });
+    return this.http.post<any>(`${this.baseUrl}/customer/modify`, payload, { headers });
+  }
+
+  // getAllUsers() {
+  //   const headers = new HttpHeaders({
+  //     'client_id': 'xzXNJFzxNtMvyLIFXCUL1005'
+  //   });
+
+  //   return this.http.get(`${this.baseUrl}/users`, { headers });
+  // }
 }
