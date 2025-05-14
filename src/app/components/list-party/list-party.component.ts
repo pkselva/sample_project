@@ -15,7 +15,7 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
 
   faEllipsisVertical = faEllipsisVertical;
 
-  userList = new MatTableDataSource<any>();
+  partyList = new MatTableDataSource<any>();
   length: any = "";
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -23,14 +23,14 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
   constructor(private apiService: ApiService) { }
 
   ngAfterViewInit(): void {
-    this.userList.paginator = this.paginator
+    this.partyList.paginator = this.paginator
   }
 
   ngOnInit(): void {
-    this.fetchUsers();
+    this.fetchParties();
   }
 
-  fetchUsers() {
+  fetchParties() {
     const payload = {
       entityTypeCode: "API_GW_PARTY",
       filters: [
@@ -52,7 +52,7 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
 
     this.apiService.getParties(payload).subscribe({
       next: (res) => {
-        this.userList.data = res.partiesList;
+        this.partyList.data = res.partiesList;
         this.length = res.totalCount;
       },
       error: (err) => {
@@ -60,5 +60,13 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
         alert(err.message)
       }
     })
+  }
+
+  deleteParty(party: any) {
+    const index = this.partyList.data.indexOf(party);
+    if (index > -1){
+      this.partyList.data.splice(index,1);
+      this.partyList.data = [...this.partyList.data]
+    }
   }
 }

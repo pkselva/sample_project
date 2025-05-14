@@ -60,4 +60,12 @@ export class ListUserComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
+  deleteUser(user: any) {
+    const index = this.userList.data.indexOf(user);
+    if (index > -1) {
+      this.userList.data.splice(index, 1);
+      this.userList.data = [...this.userList.data]
+    }
+  }
 }

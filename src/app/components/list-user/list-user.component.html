@@ -43,8 +43,10 @@
             <mat-icon>edit</mat-icon>
             <span>EDIT</span>
           </button>
-          <button mat-menu-item><mat-icon>delete_forever</mat-icon>
-            <span>DELETE</span></button>
+          <button mat-menu-item (click)="deleteUser(user)">
+            <mat-icon>delete_forever</mat-icon>
+            <span>DELETE</span>
+          </button>
         </mat-menu>
       </td>
     </ng-container>
