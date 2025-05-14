@@ -1,0 +1,81 @@
+<div class="lg:mx-20">
+    <h1 class="text-xl text-sky-800 font-medium my-5">Edit User</h1>
+    <form #updateForm="ngForm" (ngSubmit)="onSubmit(updateForm)" class="flex flex-col gap-5 text-gray-500">
+        <div class="p-10 bg-sky-50 shadow rounded-xl">
+            <h1 class="mb-3 text-sky-800 text-shadow-md font-medium">User Information</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="firstName">First Name</label>
+                        <p *ngIf="(firstNameRef.touched || updateForm.submitted) && firstNameRef.invalid && firstNameRef.errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            First Name is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="firstName" #firstNameRef="ngModel" [(ngModel)]="user.firstName" required
+                        minlength="1" [ngClass]="{'ring-red-500 ring-2': firstNameRef.invalid && firstNameRef.touched,'focus:ring-blue-500': !(firstNameRef.invalid && firstNameRef.touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="lastName">Last Name</label>
+                        <p *ngIf="(lastNameRef.touched || updateForm.submitted) && lastNameRef.invalid && lastNameRef.errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            Last Name is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="lastName" #lastNameRef="ngModel" [(ngModel)]="user.lastName" required
+                        minlength="1" [ngClass]="{'ring-red-500 ring-2': lastNameRef.invalid && lastNameRef.touched,'focus:ring-blue-500': !(lastNameRef.invalid && lastNameRef.touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="userId">User ID</label>
+                        <p *ngIf="(userIdRef.touched || updateForm.submitted) && userIdRef.invalid && userIdRef.errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            User ID is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="userId" #userIdRef="ngModel" [(ngModel)]="user.userId" required minlength="1"
+                        [ngClass]="{'ring-red-500 ring-2': userIdRef.invalid && userIdRef.touched,'focus:ring-blue-500': !(userIdRef.invalid && userIdRef.touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="userEmail">Email Address</label>
+                        <p *ngIf="(userEmailRef.touched || updateForm.submitted) && userEmailRef.invalid && userEmailRef.errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            User Email is Required*
+                        </p>
+                    </div>
+                    <input type="email" name="userEmail" #userEmailRef="ngModel" [(ngModel)]="user.emailAddress" required
+                        minlength="1" [ngClass]="{'ring-red-500 ring-2': userEmailRef.invalid && userEmailRef.touched,'focus:ring-blue-500': !(userEmailRef.invalid && userEmailRef.touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="partyMobile">Mobile Number</label>
+                        <div class="text-red-500 text-[10px] m-0 space-y-0">
+                            <p *ngIf="(userMobileRef.touched || updateForm.submitted) && userMobileRef.invalid && userMobileRef.errors?.['required']">
+                                Mobile Number is Required*
+                            </p>
+                            <p
+                                *ngIf="(userMobileRef.touched || updateForm.submitted) && userMobileRef.invalid && (userMobileRef.errors?.['minlength'] || userMobileRef.errors?.['maxlength'])">
+                                Mobile No. Should be 10 Digits*
+                            </p>
+                        </div>
+                    </div>
+                    <input type="text" name="userMobile" #userMobileRef="ngModel" [(ngModel)]="user.mobileNumber"
+                        minlength="10" maxlength="10" required
+                        [ngClass]="{'ring-red-500 ring-2': userMobileRef.invalid && userMobileRef.touched,'focus:ring-blue-500': !(userMobileRef.invalid && userMobileRef.touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+        </div>
+        <div class="flex w-full justify-center">
+            <button type="submit"
+                class="px-10 py-2 bg-sky-500 rounded-full text-white disabled:bg-sky-300 disabled:cursor-not-allowed"
+                >Update</button>
+        </div>
+    </form>
+</div>
