@@ -27,9 +27,9 @@ export class LayoutComponent {
 
     this.apiservice.logout(this.getToken).subscribe({
       next: (res) => {
+        console.log(res);
         localStorage.removeItem('token');
         this.router.navigate(['/', 'login']);
-        console.log(res);
       },
       error: (err) => {
         console.log(err);
