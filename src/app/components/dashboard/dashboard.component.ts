@@ -43,13 +43,7 @@ export class DashboardComponent {
   fetchUsers() {
     const payload = {
       entityTypeCode: "API_GW_PARTY",
-      filters: [
-        {
-          key: "activeCode",
-          operator: "eq",
-          value: "ACTIVE"
-        }
-      ],
+      filters: [],
       pagination: {
         pageSize: 1000,
         pageIndex: 0
@@ -65,7 +59,7 @@ export class DashboardComponent {
         this.dataSource = res.usersList || [];
 
         this.activeCount = this.dataSource.filter(user => user.ACTIVE_CODE === 'ACTIVE').length;
-        this.inactiveCount = this.dataSource.filter(user => user.ACTIVE_CODE === 'INACTIVE').length;
+        this.inactiveCount = this.dataSource.filter(user => user.ACTIVE_CODE === 'IN_ACTIVE').length;
 
         this.pieChartData = {
           labels: ['Active', 'Inactive'],

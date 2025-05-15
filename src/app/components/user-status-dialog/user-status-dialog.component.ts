@@ -19,21 +19,24 @@ export class UserStatusDialogComponent {
   partyCode = this.data.partyCode;
   userCode = this.data.userCode;
   userStatus = this.data.userStatus;
+  partyStatus = this.data.partyStatus;
 
-  reason: any = ""
+  reason: any = "";
 
   constructor(private apiService: ApiService) { }
 
   onSubmit(reasonForm: NgForm) {
-    const payload = {
-      partyCode: this.partyCode,
-      userCode: this.userCode,
-      reason: this.reason
-    }
 
     console.log(reasonForm.value);
 
     if (this.userStatus === "ACTIVE") {
+
+      const payload = {
+        partyCode: this.partyCode,
+        userCode: this.userCode,
+        reason: this.reason
+      }
+
       this.apiService.userActive(payload).subscribe({
         next: (res) => {
           console.log(res.message);
@@ -54,6 +57,13 @@ export class UserStatusDialogComponent {
       })
     }
     else if (this.userStatus === "IN_ACTIVE") {
+
+      const payload = {
+        partyCode: this.partyCode,
+        userCode: this.userCode,
+        reason: this.reason
+      }
+
       this.apiService.userInactive(payload).subscribe({
         next: (res) => {
           console.log(res.message);
@@ -73,6 +83,60 @@ export class UserStatusDialogComponent {
         }
       })
     }
+
+    if (this.partyStatus === "ACTIVE") {
+
+      const payload = {
+        partyCode: this.partyCode,
+        reason: this.reason
+      }
+
+      this.apiService.partyActive(payload).subscribe({
+        next: (res) => {
+          console.log(res.message);
+          this._snackBar.open(res.message, 'Close', { duration: 3000 });
+        },
+        error: (err) => {
+          console.log(err.error);
+
+          let delay = 0
+          for (let error of err.error[0].errors) {
+            setTimeout(() => {
+              this._snackBar.open(error.message, 'Close', { duration: 2000 });
+            }, delay);
+
+            delay += 2000;
+          }
+        }
+      })
+    }
+    else if (this.partyStatus === "IN_ACTIVE") {
+
+      const payload = {
+        partyCode: this.partyCode,
+        reason: this.reason
+      }
+
+      this.apiService.partyInactive(payload).subscribe({
+        next: (res) => {
+          console.log(res.message);
+          this._snackBar.open(res.message, 'Close', { duration: 2000 });
+        },
+        error: (err) => {
+          console.log(err.error);
+
+          let delay = 0
+          for (let error of err.error[0].errors) {
+            setTimeout(() => {
+              this._snackBar.open(error.message, 'Close', { duration: 2000 });
+            }, delay);
+
+            delay += 2000;
+          }
+        }
+      })
+    }
+
     this.dialog.closeAll();
   }
 

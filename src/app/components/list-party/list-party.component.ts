@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserStatusDialogComponent } from '../user-status-dialog/user-status-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list-party',
@@ -11,9 +14,26 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrl: './list-party.component.css'
 })
 export class ListPartyComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['PARTY_NAME', 'PARTY_CODE', 'EMAIL_ADDRESS', 'MOBILE_NUMBER', 'actions'];
+  displayedColumns: string[] = ['PARENT_PARTY_CODE', 'PARTY_CODE', 'EMAIL_ADDRESS', 'ACTIVE_CODE', 'actions'];
 
   faEllipsisVertical = faEllipsisVertical;
+
+  dialog = inject(MatDialog);
+  _snackBar = inject(MatSnackBar);
+
+  openDialog(partyCode: any, userCode: any, partyStatus: any) {
+    this.dialog.open(UserStatusDialogComponent, {
+      data: {
+        partyCode: partyCode,
+        userCode: userCode,
+        partyStatus: partyStatus
+      }
+    })
+  }
+
+  // partyList: any = [
+  //   { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" }
+  // ]
 
   partyList = new MatTableDataSource<any>();
   length: any = "";
@@ -33,13 +53,7 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
   fetchParties() {
     const payload = {
       entityTypeCode: "API_GW_PARTY",
-      filters: [
-        {
-          key: "activeCode",
-          operator: "eq",
-          value: "ACTIVE"
-        }
-      ],
+      filters: [],
       pagination: {
         pageSize: 1000,
         pageIndex: 0
@@ -57,15 +71,15 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
       },
       error: (err) => {
         console.log(err);
-        alert(err.message)
+        this._snackBar.open(err.message, 'Close', { duration: 2000 });
       }
     })
   }
 
   deleteParty(party: any) {
     const index = this.partyList.data.indexOf(party);
-    if (index > -1){
-      this.partyList.data.splice(index,1);
+    if (index > -1) {
+      this.partyList.data.splice(index, 1);
       this.partyList.data = [...this.partyList.data]
     }
   }

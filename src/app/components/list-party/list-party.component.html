@@ -1,11 +1,16 @@
 <div class="lg:mx-20">
-  <h1 class="text-xl text-sky-800 font-medium my-5">Party List</h1>
+  <div class="flex justify-between h-20 items-center">
+    <h1 class="text-xl text-sky-800 font-medium my-5">Party List</h1>
+    <button [routerLink]="['/','createparty']" class="px-5 py-1 shadow bg-sky-100 rounded-full text-sky-800">Add
+      Data</button>
+  </div>
+
   <table mat-table [dataSource]="partyList">
 
-    <ng-container matColumnDef="PARTY_NAME">
+    <ng-container matColumnDef="PARENT_PARTY_CODE">
       <th mat-header-cell *matHeaderCellDef>Party Name</th>
       <td mat-cell *matCellDef="let party">
-        <p class="w-[120px]"> {{party.PARTY_NAME}} </p>
+        <p class="w-[120px]"> {{party.PARENT_PARTY_CODE}} </p>
       </td>
     </ng-container>
 
@@ -27,6 +32,14 @@
       <th mat-header-cell *matHeaderCellDef>Mobile Number</th>
       <td mat-cell *matCellDef="let party">
         <p> {{party.MOBILE_NUMBER}} </p>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ACTIVE_CODE">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let party">
+        <p class="p-2 rounded bg-gray-100 flex justify-center w-fit"
+          (click)="openDialog(party.PARTY_CODE, party.PARENT_PARTY_CODE, party.ACTIVE_CODE)">{{party.ACTIVE_CODE}}</p>
       </td>
     </ng-container>
 

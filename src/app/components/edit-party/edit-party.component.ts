@@ -74,6 +74,6 @@ export class EditPartyComponent implements OnInit {
           }
         }
       }
-    })
+    });
   }
 }

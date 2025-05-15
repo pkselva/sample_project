@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { ApiService } from '../../services/api.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { UserStatusDialogComponent } from '../user-status-dialog/user-status-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list-user',
@@ -18,6 +19,7 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   faEllipsisVertical = faEllipsisVertical;
 
   dialog = inject(MatDialog);
+  _snackBar = inject(MatSnackBar);
 
   openDialog(partyCode: any, userCode: any, userStatus: any) {
     this.dialog.open(UserStatusDialogComponent, {
@@ -28,6 +30,10 @@ export class ListUserComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
+  // userList: any = [
+  //   { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" }
+  // ]
 
   userList = new MatTableDataSource<any>();
   length: any = "";
@@ -47,13 +53,7 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   fetchUsers() {
     const payload = {
       entityTypeCode: "API_GW_PARTY",
-      filters: [
-        {
-          key: "activeCode",
-          operator: "eq",
-          value: "ACTIVE"
-        }
-      ],
+      filters: [],
       pagination: {
         pageSize: 1000,
         pageIndex: 0
@@ -71,6 +71,7 @@ export class ListUserComponent implements OnInit, AfterViewInit {
       },
       error: (err) => {
         console.log(err);
+        this._snackBar.open(err.message, 'Close', { duration: 2000 });
       }
     })
   }
