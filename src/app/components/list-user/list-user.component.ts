@@ -112,7 +112,7 @@ export class ListUserComponent implements OnInit, AfterViewInit {
 })
 export class DeleteUserComponent {
 
-  dialogRef = inject(MatDialogRef<DeleteUserComponent>);
+  dialogRef = inject(MatDialogRef);
   data = inject(MAT_DIALOG_DATA);
 
   user = this.data.user;
@@ -121,7 +121,6 @@ export class DeleteUserComponent {
   deleteUser() {
     const filteredData = this.userList.filter((u: any) => u !== this.user);
 
-    // Pass the updated list back to the parent
     this.dialogRef.close(filteredData);
   }
 }
