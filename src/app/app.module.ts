@@ -19,6 +19,8 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { EditPartyComponent } from './components/edit-party/edit-party.component';
+import { NgChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { EditPartyComponent } from './components/edit-party/edit-party.component
     ListUserComponent,
     ListPartyComponent,
     EditUserComponent,
-    EditPartyComponent
+    EditPartyComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { EditPartyComponent } from './components/edit-party/edit-party.component
     MatTableModule,
     MatPaginator,
     DialogModule,
-    MatMenuModule
+    MatMenuModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

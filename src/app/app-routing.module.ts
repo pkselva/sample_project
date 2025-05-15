@@ -9,17 +9,19 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { ListPartyComponent } from './components/list-party/list-party.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { EditPartyComponent } from './components/edit-party/edit-party.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'createparty', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'userlist', component: ListUserComponent },
       { path: 'partylist', component: ListPartyComponent },
       { path: 'createparty', component: CreatePartyComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'userlist/edituser', component: EditUserComponent },
       { path: 'partylist/editparty', component: EditPartyComponent },
     ]
