@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ApiService } from '../../services/api.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserStatusDialogComponent } from '../user-status-dialog/user-status-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -21,6 +21,8 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   dialog = inject(MatDialog);
   _snackBar = inject(MatSnackBar);
 
+  newuserList = signal('');
+
   openDialog(partyCode: any, userCode: any, userStatus: any) {
     this.dialog.open(UserStatusDialogComponent, {
       data: {
@@ -31,11 +33,12 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     })
   }
 
-  // userList: any = [
-  //   { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" }
-  // ]
+  userList: any = [
+    { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" },
+    { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUHJ", EMAIL_ADDRESS: "selvankarthick62@gmail.com", ACTIVE_CODE: "ACTIVE" },
+  ]
 
-  userList = new MatTableDataSource<any>();
+  // userList = new MatTableDataSource<any>();
   length: any = "";
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -77,10 +80,48 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   }
 
   deleteUser(user: any) {
-    const index = this.userList.data.indexOf(user);
-    if (index > -1) {
-      this.userList.data.splice(index, 1);
-      this.userList.data = [...this.userList.data]
-    }
+    const dialogRef = this.dialog.open(DeleteUserComponent, {
+      data: {
+        user: user,
+        list: this.userList
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((updatedList: any[]) => {
+      if (updatedList) {
+        this.userList = updatedList;
+        console.log(this.userList);
+        this._snackBar.open('User deleted successfully', 'Close', { duration: 2000 });
+      }
+    });
+  }
+
+
+  // deleteUser(user: any) {
+  //   const index = this.userList.data.indexOf(user);
+  //   if (index > -1) {
+  //     this.userList.data.splice(index, 1);
+  //     this.userList.data = [...this.userList.data]
+  //   }
+  // }
+}
+
+@Component({
+  selector: 'app-list-user',
+  templateUrl: './delete-user.component.html'
+})
+export class DeleteUserComponent {
+
+  dialogRef = inject(MatDialogRef<DeleteUserComponent>);
+  data = inject(MAT_DIALOG_DATA);
+
+  user = this.data.user;
+  userList = this.data.list;
+
+  deleteUser() {
+    const filteredData = this.userList.filter((u: any) => u !== this.user);
+
+    // Pass the updated list back to the parent
+    this.dialogRef.close(filteredData);
   }
 }
