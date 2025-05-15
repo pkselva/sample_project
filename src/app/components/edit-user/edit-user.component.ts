@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-user',
@@ -19,14 +20,16 @@ export class EditUserComponent implements OnInit {
     mobileNumber: ""
   }
 
-  constructor(private apiService: ApiService, private router: ActivatedRoute) { }
+  private _snackBar = inject(MatSnackBar);
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     // const fullName = this.router.snapshot.queryParamMap.get('name');
     // const id = this.router.snapshot.queryParamMap.get('id');
     // const email = this.router.snapshot.queryParamMap.get('email');
     // const no = this.router.snapshot.queryParamMap.get('no');
-    this.router.queryParamMap.subscribe(params => {
+    this.route.queryParamMap.subscribe(params => {
       const fullName = params.get('name');
       this.user.firstName = fullName?.split(" ")[0];
       this.user.lastName = fullName?.split(" ")[1];
@@ -50,17 +53,30 @@ export class EditUserComponent implements OnInit {
         parentPartyCode: "ABC"
       }
     }
-    
+
     this.apiService.editUser(payload).subscribe({
       next: (res) => {
         console.log(res)
-        alert(res.message);
+        this.router.navigate(['userlist']);
+        this._snackBar.open(res.message);
       },
       error: (err) => {
-        console.log(err.message);
-        alert(err.message)
-      } 
-    })
+        console.log(err);
 
+        if (err.error.status === "error") {
+          this._snackBar.open(err.error.message, 'Close', { duration: 2000 })
+        }
+        else {
+          let delay = 0;
+          for (let error of err.error[0].errors) {
+            setTimeout(() => {
+              this._snackBar.open(error.message, 'Close', { duration: 2000 });
+            }, delay);
+
+            delay += 2000;
+          }
+        }
+      }
+    });
   }
 }

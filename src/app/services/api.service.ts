@@ -17,7 +17,6 @@ export class ApiService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(data: any): Observable<any> {
-
     return this.http.post(`${this.baseUrl}/signIn`, data,);
   }
 
@@ -69,12 +68,4 @@ export class ApiService {
     });
     return this.http.post<any>(`${this.baseUrl}/customer/modify`, payload, { headers });
   }
-
-  // getAllUsers() {
-  //   const headers = new HttpHeaders({
-  //     'client_id': 'xzXNJFzxNtMvyLIFXCUL1005'
-  //   });
-
-  //   return this.http.get(`${this.baseUrl}/users`, { headers });
-  // }
 }

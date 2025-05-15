@@ -21,6 +21,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { EditPartyComponent } from './components/edit-party/edit-party.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatPaginator,
     DialogModule,
     MatMenuModule,
-    NgChartsModule
+    NgChartsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

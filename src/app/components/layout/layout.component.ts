@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-layout',
@@ -12,6 +13,8 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 export class LayoutComponent {
 
   faEllipsisVertical = faEllipsisVertical;
+  private _snackBar = inject(MatSnackBar);
+
 
   token = localStorage.getItem('token')
 
@@ -30,9 +33,14 @@ export class LayoutComponent {
         console.log(res);
         localStorage.removeItem('token');
         this.router.navigate(['/', 'login']);
+        this._snackBar.open(res.message, 'Close', { duration: 2000 });
       },
       error: (err) => {
-        console.log(err);
+        if (err.error[0].errors[0].message === "Session token already inActive") {
+          localStorage.removeItem('token');
+          this.router.navigate(['/', 'login']);
+          this._snackBar.open('Logged Out Successfully', 'Close', { duration: 2000 });
+        }
       }
     });
   }

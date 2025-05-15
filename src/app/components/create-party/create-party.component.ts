@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-party',
@@ -18,6 +19,8 @@ export class CreatePartyComponent {
   lastName = "";
   userEmail = "";
   userMobile = "";
+
+  private _snackBar = inject(MatSnackBar);
 
   constructor(private apiService: ApiService) { }
 
@@ -49,11 +52,20 @@ export class CreatePartyComponent {
       this.apiService.createparty(payload).subscribe({
         next: (res) => {
           console.log(res);
-          alert("Data Added Successfully");
-          onboardingForm.reset();
+          this._snackBar.open(res.message, 'Close', { duration: 2000 });
+          onboardingForm.onReset();
         },
         error: (err) => {
           console.log(err);
+
+          let delay = 0
+          for (let error of err.error[0].errors) {
+            setTimeout(() => {
+              this._snackBar.open(error.message, 'Close', { duration: 2000 });
+            }, delay);
+
+            delay += 2000;
+          }
         }
       })
     }

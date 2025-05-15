@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-party',
@@ -17,8 +18,10 @@ export class EditPartyComponent implements OnInit {
   partyEmail: any = "";
   partyMobile: any = "";
 
+  private _snackBar = inject(MatSnackBar);
+
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private apiService: ApiService,
     private router: Router
   ) { }
@@ -51,9 +54,25 @@ export class EditPartyComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.router.navigate(['/partylist']);
+        this._snackBar.open(res.message, 'Close', { duration: 2000 });
+
       },
       error: (err) => {
         console.log(err);
+
+        if (err.error.status === "error") {
+          this._snackBar.open(err.error.message, 'Close', { duration: 2000 })
+        }
+        else {
+          let delay = 0;
+          for (let error of err.error[0].errors) {
+            setTimeout(() => {
+              this._snackBar.open(error.message, 'Close', { duration: 2000 });
+            }, delay);
+
+            delay += 2000;
+          }
+        }
       }
     })
   }
