@@ -29,6 +29,13 @@
             <ul class="flex flex-col gap-2">
                 <li>
                     <a class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-200"
+                        [routerLink]="['dashboard']" routerLinkActive="bg-sky-100 text-sky-800 font-medium"
+                        (click)="isSidebarOpen = false">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-200"
                         [routerLink]="['createparty']" routerLinkActive="bg-sky-100 text-sky-800 font-medium"
                         (click)="isSidebarOpen = false">
                         Onboard User
