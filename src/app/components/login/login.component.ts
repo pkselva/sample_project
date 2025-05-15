@@ -44,18 +44,13 @@ export class LoginComponent {
         error: (err) => {
           console.log(err);
 
-          if (err.error.status === "error") {
-            this._snackBar.open(err.error.message, 'Close', { duration: 2000 })
-          }
-          else {
-            let delay = 0;
-            for (let error of err.error[0].errors) {
-              setTimeout(() => {
-                this._snackBar.open(error.message, 'Close', { duration: 2000 });
-              }, delay);
+          let delay = 0;
+          for (let error of err.error[0].errors) {
+            setTimeout(() => {
+              this._snackBar.open(error.message, 'Close', { duration: 2000 });
+            }, delay);
 
-              delay += 2000;
-            }
+            delay += 2000;
           }
         }
       });
