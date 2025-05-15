@@ -68,4 +68,18 @@ export class ApiService {
     });
     return this.http.post<any>(`${this.baseUrl}/customer/modify`, payload, { headers });
   }
+
+  userActive(payload: any): Observable<any> {
+    const headers = new HttpHeaders({
+      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
+    });
+    return this.http.post<any>(`${this.baseUrl}/user/inActive`, payload, { headers });
+  }
+
+  userInactive(payload: any): Observable<any> {
+    const headers = new HttpHeaders({
+      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
+    });
+    return this.http.post<any>(`${this.baseUrl}/user/Active`, payload, { headers });
+  }
 }

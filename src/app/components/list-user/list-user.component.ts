@@ -3,6 +3,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ApiService } from '../../services/api.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { UserStatusDialogComponent } from '../user-status-dialog/user-status-dialog.component';
 
 @Component({
   selector: 'app-list-user',
@@ -15,6 +17,18 @@ export class ListUserComponent implements OnInit, AfterViewInit {
 
   faEllipsisVertical = faEllipsisVertical;
 
+  dialog = inject(MatDialog);
+
+  openDialog(partyCode: any, userCode: any, userStatus: any) {
+    this.dialog.open(UserStatusDialogComponent, {
+      data: {
+        partyCode: partyCode,
+        userCode: userCode,
+        userStatus: userStatus
+      }
+    })
+  }
+
   userList = new MatTableDataSource<any>();
   length: any = "";
 
@@ -23,7 +37,7 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   constructor(private apiService: ApiService) { }
 
   ngAfterViewInit(): void {
-    this.userList.paginator = this.paginator
+    this.userList.paginator = this.paginator;
   }
 
   ngOnInit(): void {

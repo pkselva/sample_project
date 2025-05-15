@@ -1,0 +1,24 @@
+<div class="m-10 flex flex-col gap-3">
+    <div class="w-full flex flex-col justify-center gap-4">
+        <h1 class="text-lg font-medium text-sky-800">User Status</h1>
+        <p>If you Want to Change this Status into INACTIVE?</p>
+    </div>
+    <form #reasonForm="ngForm" (ngSubmit)="onSubmit(reasonForm)" class="flex flex-col gap-5 text-gray-500">
+        <div class="flex flex-col gap-1">
+            <div class="flex justify-between">
+                <label class="text-xs" for="reason">Reason</label>
+                <p *ngIf="(reasonRef.touched || reasonForm.submitted) && reasonRef.invalid && reasonRef.errors?.['required']"
+                    style="color:red; margin:0; font-size: x-small;">
+                    Reason is Required*
+                </p>
+            </div>
+            <input type="text" name="reason" #reasonRef="ngModel" [(ngModel)]="reason" required minlength="1"
+                [ngClass]="{'ring-red-500 ring-2': reasonRef.invalid && reasonRef.touched,'focus:ring-blue-500': !(reasonRef.invalid && reasonRef.touched)}"
+                class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div class="flex gap-2">
+            <button type="submit" class="w-[50px] py-1 bg-sky-500 hover:bg-sky-800 text-white rounded">Yes</button>
+            <button (click)="onClose()" class="w-[50px] py-1 bg-sky-500 hover:bg-sky-800 text-white rounded">No</button>
+        </div>
+    </form>
+</div>

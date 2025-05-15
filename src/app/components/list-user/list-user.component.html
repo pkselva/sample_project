@@ -29,7 +29,7 @@
     <ng-container matColumnDef="ACTIVE_CODE">
       <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let user">
-        <p class="w-10">{{user.ACTIVE_CODE}}</p>
+        <p class="p-2 rounded bg-gray-100 flex justify-center w-fit" (click)="openDialog(user.PARENT_PARTY_CODE, user.PARTY_CODE, user.ACTIVE_CODE)">{{user.ACTIVE_CODE}}</p>
       </td>
     </ng-container>
 

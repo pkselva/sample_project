@@ -17,11 +17,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ListPartyComponent } from './components/list-party/list-party.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { EditPartyComponent } from './components/edit-party/edit-party.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserStatusDialogComponent } from './components/user-status-dialog/user-status-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ListPartyComponent,
     EditUserComponent,
     EditPartyComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserStatusDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     DialogModule,
     MatMenuModule,
     NgChartsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
