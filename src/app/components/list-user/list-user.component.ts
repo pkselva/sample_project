@@ -33,12 +33,12 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     })
   }
 
-  userList: any = [
-    { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" },
-    { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUHJ", EMAIL_ADDRESS: "selvankarthick62@gmail.com", ACTIVE_CODE: "ACTIVE" },
-  ]
+  // userList: any = [
+  //   { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" },
+  //   { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUHJ", EMAIL_ADDRESS: "selvankarthick62@gmail.com", ACTIVE_CODE: "ACTIVE" },
+  // ]
 
-  // userList = new MatTableDataSource<any>();
+  userList = new MatTableDataSource<any>();
   length: any = "";
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -89,8 +89,10 @@ export class ListUserComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((updatedList: any[]) => {
       if (updatedList) {
-        this.userList = updatedList;
-        console.log(this.userList);
+        this.userList.data = updatedList;
+
+        // console.log(this.userList.data);
+        
         this._snackBar.open('User deleted successfully', 'Close', { duration: 2000 });
       }
     });
@@ -119,8 +121,11 @@ export class DeleteUserComponent {
   userList = this.data.list;
 
   deleteUser() {
-    const filteredData = this.userList.filter((u: any) => u !== this.user);
-
+    const filteredData = this.userList.data.filter((u: any) => u !== this.user);
     this.dialogRef.close(filteredData);
+  }
+
+  onClose(){
+    this.dialogRef.close();
   }
 }

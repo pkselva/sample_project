@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ListPartyComponent } from './components/list-party/list-party.component';
+import { DeletePartyComponent, ListPartyComponent } from './components/list-party/list-party.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -37,7 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     EditUserComponent,
     EditPartyComponent,
     DashboardComponent,
-    UserStatusDialogComponent
+    UserStatusDialogComponent,
+    DeletePartyComponent
   ],
   imports: [
     BrowserModule,

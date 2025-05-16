@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserStatusDialogComponent } from '../user-status-dialog/user-status-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -77,10 +77,52 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
   }
 
   deleteParty(party: any) {
-    const index = this.partyList.data.indexOf(party);
-    if (index > -1) {
-      this.partyList.data.splice(index, 1);
-      this.partyList.data = [...this.partyList.data]
-    }
+    const dialogRef = this.dialog.open(DeletePartyComponent, {
+      data: {
+        party: party,
+        list: this.partyList
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((updatedList: any[]) => {
+      if (updatedList) {
+        this.partyList.data = updatedList;
+
+        // console.log(this.partyList.data);
+
+        this._snackBar.open('User deleted successfully', 'Close', { duration: 2000 });
+      }
+    });
+  }
+
+  // deleteParty(party: any) {
+  //   const index = this.partyList.data.indexOf(party);
+  //   if (index > -1) {
+  //     this.partyList.data.splice(index, 1);
+  //     this.partyList.data = [...this.partyList.data]
+  //   }
+  // }
+}
+
+@Component({
+  selector: 'app-list-user',
+  templateUrl: './delete-party.component.html',
+  standalone: false
+})
+export class DeletePartyComponent {
+
+  dialogRef = inject(MatDialogRef);
+  data = inject(MAT_DIALOG_DATA);
+
+  party = this.data.party;
+  partyList = this.data.list;
+
+  deleteUser() {
+    const filteredData = this.partyList.data.filter((p: any) => p !== this.party);
+    this.dialogRef.close(filteredData);
+  }
+
+  onClose() {
+    this.dialogRef.close();
   }
 }

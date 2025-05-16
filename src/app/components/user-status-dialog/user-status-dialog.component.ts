@@ -139,8 +139,4 @@ export class UserStatusDialogComponent {
 
     this.dialog.closeAll();
   }
-
-  onClose() {
-    this.dialog.closeAll();
-  }
 }
