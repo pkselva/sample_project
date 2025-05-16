@@ -22,78 +22,82 @@ export class ListPartyComponent implements AfterViewInit, OnInit {
   _snackBar = inject(MatSnackBar);
 
   openDialog(partyCode: any, userCode: any, partyStatus: any) {
-    this.dialog.open(UserStatusDialogComponent, {
+    const dialogRef = this.dialog.open(UserStatusDialogComponent, {
       data: {
         partyCode: partyCode,
         userCode: userCode,
         partyStatus: partyStatus
       }
     })
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchParties();
+    });
   }
 
-  // partyList: any = [
-  //   { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" }
-  // ]
+// partyList: any = [
+//   { PARENT_PARTY_CODE: "ABC", PARTY_CODE: "FZZTYUED", EMAIL_ADDRESS: "karthickselvan07@gmail.com", ACTIVE_CODE: "ACTIVE" }
+// ]
 
-  partyList = new MatTableDataSource<any>();
-  length: any = "";
+partyList = new MatTableDataSource<any>();
+length: any = "";
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+@ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private apiService: ApiService) { }
+constructor(private apiService: ApiService) { }
 
-  ngAfterViewInit(): void {
-    this.partyList.paginator = this.paginator
-  }
+ngAfterViewInit(): void {
+  this.partyList.paginator = this.paginator
+}
 
-  ngOnInit(): void {
-    this.fetchParties();
-  }
+ngOnInit(): void {
+  this.fetchParties();
+}
 
-  fetchParties() {
-    const payload = {
-      entityTypeCode: "API_GW_PARTY",
-      filters: [],
-      pagination: {
-        pageSize: 1000,
-        pageIndex: 0
-      },
-      sorting: {
-        key: "createdOn",
-        value: "asc"
-      }
+fetchParties() {
+  const payload = {
+    entityTypeCode: "API_GW_PARTY",
+    filters: [],
+    pagination: {
+      pageSize: 1000,
+      pageIndex: 0
+    },
+    sorting: {
+      key: "createdOn",
+      value: "asc"
     }
-
-    this.apiService.getParties(payload).subscribe({
-      next: (res) => {
-        this.partyList.data = res.partiesList;
-        this.length = res.totalCount;
-      },
-      error: (err) => {
-        console.log(err);
-        this._snackBar.open(err.message, 'Close', { duration: 2000 });
-      }
-    })
   }
 
-  deleteParty(party: any) {
-    const dialogRef = this.dialog.open(DeletePartyComponent, {
-      data: {
-        party: party,
-        list: this.partyList
-      }
-    });
+  this.apiService.getParties(payload).subscribe({
+    next: (res) => {
+      this.partyList.data = res.partiesList;
+      this.length = res.totalCount;
+    },
+    error: (err) => {
+      console.log(err);
+      this._snackBar.open(err.message, 'Close', { duration: 2000 });
+    }
+  })
+}
 
-    dialogRef.afterClosed().subscribe((updatedList: any[]) => {
-      if (updatedList) {
-        this.partyList.data = updatedList;
+deleteParty(party: any) {
+  const dialogRef = this.dialog.open(DeletePartyComponent, {
+    data: {
+      party: party,
+      list: this.partyList
+    }
+  });
 
-        // console.log(this.partyList.data);
+  dialogRef.afterClosed().subscribe((updatedList: any[]) => {
+    if (updatedList) {
+      this.partyList.data = updatedList;
 
-        this._snackBar.open('User deleted successfully', 'Close', { duration: 2000 });
-      }
-    });
-  }
+      // console.log(this.partyList.data);
+
+      this._snackBar.open('User deleted successfully', 'Close', { duration: 2000 });
+    }
+  });
+}
 
   // deleteParty(party: any) {
   //   const index = this.partyList.data.indexOf(party);

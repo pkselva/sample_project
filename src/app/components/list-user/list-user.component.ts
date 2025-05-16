@@ -24,13 +24,16 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   newuserList = signal('');
 
   openDialog(partyCode: any, userCode: any, userStatus: any) {
-    this.dialog.open(UserStatusDialogComponent, {
+    const dialogRef = this.dialog.open(UserStatusDialogComponent, {
       data: {
         partyCode: partyCode,
         userCode: userCode,
         userStatus: userStatus
       }
-    })
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchUsers();
+    });
   }
 
   // userList: any = [

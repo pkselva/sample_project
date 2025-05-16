@@ -40,6 +40,7 @@ export class UserStatusDialogComponent {
       this.apiService.userActive(payload).subscribe({
         next: (res) => {
           console.log(res.message);
+          this.dialog.closeAll();
           this._snackBar.open(res.message, 'Close', { duration: 3000 });
         },
         error: (err) => {
@@ -67,6 +68,7 @@ export class UserStatusDialogComponent {
       this.apiService.userInactive(payload).subscribe({
         next: (res) => {
           console.log(res.message);
+          this.dialog.closeAll();
           this._snackBar.open(res.message, 'Close', { duration: 2000 });
         },
         error: (err) => {
@@ -94,6 +96,7 @@ export class UserStatusDialogComponent {
       this.apiService.partyActive(payload).subscribe({
         next: (res) => {
           console.log(res.message);
+          this.dialog.closeAll();
           this._snackBar.open(res.message, 'Close', { duration: 3000 });
         },
         error: (err) => {
@@ -120,6 +123,7 @@ export class UserStatusDialogComponent {
       this.apiService.partyInactive(payload).subscribe({
         next: (res) => {
           console.log(res.message);
+          this.dialog.closeAll();
           this._snackBar.open(res.message, 'Close', { duration: 2000 });
         },
         error: (err) => {
@@ -136,7 +140,5 @@ export class UserStatusDialogComponent {
         }
       })
     }
-
-    this.dialog.closeAll();
   }
 }
