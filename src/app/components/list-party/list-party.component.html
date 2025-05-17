@@ -1,44 +1,45 @@
 <div class="lg:mx-20">
   <div class="flex justify-between h-20 items-center">
     <h1 class="text-xl text-sky-800 font-medium my-5">Party List</h1>
-    <button [routerLink]="['/','createparty']" class="px-5 py-1 shadow bg-sky-100 rounded-full text-sky-800">Add
+    <button [routerLink]="['/','createparty']"
+      class="px-5 py-1 bg-white hover:bg-sky-300 hover:text-white shadow rounded-full text-sky-800 hover:cursor-pointer">Add
       Data</button>
   </div>
 
   <table mat-table [dataSource]="partyList">
 
     <ng-container matColumnDef="PARENT_PARTY_CODE">
-      <th mat-header-cell *matHeaderCellDef>Party Name</th>
+      <th mat-header-cell *matHeaderCellDef>PARTY NAME</th>
       <td mat-cell *matCellDef="let party">
         <p class="w-[120px]"> {{party.PARENT_PARTY_CODE}} </p>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="PARTY_CODE">
-      <th mat-header-cell *matHeaderCellDef>Party Code</th>
+      <th mat-header-cell *matHeaderCellDef>PARTY CODE</th>
       <td mat-cell *matCellDef="let party">
         <p class="w-[60px] lg:w-full"> {{party.PARTY_CODE}} </p>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="EMAIL_ADDRESS">
-      <th mat-header-cell *matHeaderCellDef>Email Address</th>
+      <th mat-header-cell *matHeaderCellDef>EMAIL ADDRESS</th>
       <td mat-cell *matCellDef="let party">
         <p> {{party.EMAIL_ADDRESS}} </p>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="MOBILE_NUMBER">
-      <th mat-header-cell *matHeaderCellDef>Mobile Number</th>
+      <th mat-header-cell *matHeaderCellDef>MOBILE NUMBER</th>
       <td mat-cell *matCellDef="let party">
         <p> {{party.MOBILE_NUMBER}} </p>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="ACTIVE_CODE">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <th mat-header-cell *matHeaderCellDef>STATUS</th>
       <td mat-cell *matCellDef="let party">
-        <p class="p-2 rounded bg-gray-100 flex justify-center w-fit"
+        <p class="p-2 rounded bg-gray-100 hover:cursor-pointer hover:bg-black hover:text-gray-100 w-fit"
           (click)="openDialog(party.PARTY_CODE, party.PARENT_PARTY_CODE, party.ACTIVE_CODE)">{{party.ACTIVE_CODE}}</p>
       </td>
     </ng-container>

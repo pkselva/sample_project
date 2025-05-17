@@ -1,10 +1,35 @@
-<div class="block w-100 h-100 bg-sky-50 p-5 rounded-3xl">
-  <canvas baseChart
-    [data]="pieChartData"
-    [type]="pieChartType"
-    [options]="pieChartOptions">
-  </canvas>
+<div class="lg:mx-20">
+  <h1 class="text-xl text-sky-800 font-medium my-5">Dashboard</h1>
+  <div class="flex flex-col gap-5">
+    <section class="flex w-full justify-between gap-3">
+      <div class="flex flex-col justify-between">
+        <div class="bg-sky-50 p-5 rounded-3xl w-90">
+          <p class="text-3xl font-bold">{{userLength + partyLength}}</p>
+          <p class="text-xl text-gray-400">Total Users</p>
+        </div>
+        <div class="bg-sky-50 p-5 rounded-3xl w-90">
+          <p class="text-3xl font-bold">{{partyLength}}</p>
+          <p class="text-xl text-gray-400">Total Customers</p>
+        </div>
+        <div class="bg-sky-50 p-5 rounded-3xl w-90">
+          <p class="text-3xl font-bold">{{userLength}}</p>
+          <p class="text-xl text-gray-400">Total Employees</p>
+        </div>
+      </div>
+      <div class="bg-sky-50 p-5 rounded-3xl">
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="bg-sky-50 p-5 rounded-3xl">
+        <canvas id="partyLineChart"></canvas>
+      </div>
+    </section>
+    <section class="flex w-full justify-between">
+      <div class="bg-sky-50 p-5 rounded-3xl w-130">
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="bg-sky-50 rounded-3xl w-130 h-100">
+        <canvas id="MyPieChart" class="p-5"></canvas>
+      </div>
+    </section>
+  </div>
 </div>
-
-
-

@@ -9,8 +9,7 @@ import { CanActivate, Router } from '@angular/router';
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private router: Router, 
-    // private jwtHelper: JwtHelperService
+    private router: Router
   ) { }
   
   canActivate(): boolean {
@@ -23,12 +22,6 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/login']);
       return false;
     }
-
-    // if(this.jwtHelper.isTokenExpired(token)){
-    //   localStorage.removeItem('token');
-    //   this.router.navigate(['/login']);
-    //   return false;
-    // }
 
     return true;
   }
