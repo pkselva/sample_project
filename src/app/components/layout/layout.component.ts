@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
-  isSidebarOpen: boolean = true;
+  isSidebarOpen: any;
 
   changeEvent(data: boolean) {
     this.isSidebarOpen = data;

@@ -29,7 +29,7 @@ export class NavBarComponent {
 
   toggleSidebar() {
     this.sidebarState = !this.sidebarState;
-    this.isSidebarOpen.emit(this.sidebarState); // Emit to parent
+    this.isSidebarOpen.emit(this.sidebarState);
   }
 
   onSignOut() {
