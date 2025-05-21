@@ -1,0 +1,22 @@
+<nav class="flex items-center px-5 py-2 justify-between fixed top-0 w-full h-16 z-50 bg-sky-100 text-sky-800 shadow">
+    <div class="sm:flex flex sm:gap-5 gap-2 h-16 items-center">
+        <button class="md:hidden z-20 p-2 rounded-md bg-white hover:bg-sky-50" (click)="toggleSidebar()">
+            <fa-icon [icon]="faEllipsisVertical" class="px-2 text-sky-800"></fa-icon>
+        </button>
+        <div class="text-sm md:text-md">
+            LOGO
+        </div>
+    </div>
+    <div class="sm:flex flex sm:gap-5 gap-2 h-16 items-center">
+        <!-- <ul class="flex gap-5">
+                <li>
+                    <button (click)="onAuth()" class="hidden md:block">Authorize</button>
+                </li>
+            </ul> -->
+        <p class="text-sm md:text-md">Welcome, KOTAK</p>
+        <button (click)="onSignOut()"
+            class="p-2 bg-white hover:bg-sky-300 hover:text-white rounded hover:cursor-pointer text-xs md:text-sm">
+            Sign Out
+        </button>
+    </div>
+</nav>
