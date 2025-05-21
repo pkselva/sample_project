@@ -24,7 +24,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserStatusDialogComponent } from './components/user-status-dialog/user-status-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AuthInterceptor } from './services/auth-interceptor'
+import { AuthInterceptor } from './services/auth-interceptor';
+import { SideBarComponent } from './components/layout/side-bar/side-bar.component'
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthInterceptor } from './services/auth-interceptor'
     EditPartyComponent,
     DashboardComponent,
     UserStatusDialogComponent,
-    DeletePartyComponent
+    DeletePartyComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,

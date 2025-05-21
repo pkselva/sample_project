@@ -15,14 +15,13 @@ export class LayoutComponent {
   faEllipsisVertical = faEllipsisVertical;
   private _snackBar = inject(MatSnackBar);
 
-
   token = localStorage.getItem('token')
 
   getToken = {
     apiAccessSessionToken: `Bearer ${this.token}`
   }
 
-  isSidebarOpen = false;
+  isSidebarOpen: Boolean | undefined;
 
   constructor(private apiservice: ApiService, private router: Router) { }
 

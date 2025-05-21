@@ -23,42 +23,8 @@
         </div>
     </nav>
     <div class="flex">
-        <section
-            class="fixed top-16 left-0 w-64 h-full bg-white shadow-lg border-r border-gray-200 p-4 z-10 transition-all duration-300"
-            [class]="isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'">
-            <ul class="flex flex-col gap-2">
-                <li>
-                    <a class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-200"
-                        [routerLink]="['dashboard']" routerLinkActive="bg-sky-100 text-sky-800 font-medium"
-                        (click)="isSidebarOpen = false">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-200"
-                        [routerLink]="['createparty']" routerLinkActive="bg-sky-100 text-sky-800 font-medium"
-                        (click)="isSidebarOpen = false">
-                        Onboard User
-                    </a>
-                </li>
-                <li>
-                    <a class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-200"
-                        [routerLink]="['userlist']" routerLinkActive="bg-sky-100 text-sky-800 font-medium"
-                        (click)="isSidebarOpen = false">
-                        List Users
-                    </a>
-                </li>
-                <li>
-                    <a class="flex items-center p-3 rounded-lg text-gray-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-200"
-                        [routerLink]="['partylist']" routerLinkActive="bg-sky-100 text-sky-800 font-medium"
-                        (click)="isSidebarOpen = false">
-                        List Customers
-                    </a>
-                </li>
-            </ul>
-        </section>
-
-        <div class="fixed bg-opacity-50 z-[9] md:hidden duration-300" (click)="isSidebarOpen = false"></div>
+        
+        <app-side-bar [isSidebarOpen]="isSidebarOpen"></app-side-bar>
 
         <main class="bg-white md:w-[calc(100vw-16rem)] w-full p-5 md:ms-[16rem]">
             <router-outlet></router-outlet>
