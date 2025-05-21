@@ -11,89 +11,54 @@ export class ApiService {
   private baseUrl = 'http://172.16.16.49:7055/v1/trade'
   // private baseUrl = 'http://localhost:7000/v1/trade'
 
-  token = localStorage.getItem('token')
 
-
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   login(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/signIn`, data,);
   }
 
   logout(token: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "Authorization": `${this.token}`
-    });
-    return this.http.post(`${this.baseUrl}/signOut`, token, { headers });
+    return this.http.post(`${this.baseUrl}/signOut`, token);
   }
 
   authorize(token: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "Authorization": `${this.token}`
-    });
-    return this.http.post(`${this.baseUrl}/authenticate/token`, token, { headers });
+    return this.http.post(`${this.baseUrl}/authenticate/token`, token);
   }
 
   createparty(data: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post(`${this.baseUrl}/onboarding/submit`, data, { headers });
+    return this.http.post(`${this.baseUrl}/onboarding/submit`, data);
   }
 
   getUsers(pagination: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/user/list`, pagination, { headers });
+    return this.http.post<any>(`${this.baseUrl}/user/list`, pagination);
   }
 
   getParties(pagination: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/customer/list`, pagination, { headers });
+    return this.http.post<any>(`${this.baseUrl}/customer/list`, pagination);
   }
 
   editUser(payload: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/user/modify`, payload, { headers });
+    return this.http.post<any>(`${this.baseUrl}/user/modify`, payload);
   }
 
   editParty(payload: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/customer/modify`, payload, { headers });
+    return this.http.post<any>(`${this.baseUrl}/customer/modify`, payload);
   }
 
   userActive(payload: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/user/inActive`, payload, { headers });
+    return this.http.post<any>(`${this.baseUrl}/user/inActive`, payload);
   }
 
   userInactive(payload: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/user/active`, payload, { headers });
+    return this.http.post<any>(`${this.baseUrl}/user/active`, payload);
   }
 
   partyActive(payload: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/customer/inActive`, payload, { headers });
+    return this.http.post<any>(`${this.baseUrl}/customer/inActive`, payload);
   }
 
   partyInactive(payload: any): Observable<any> {
-    const headers = new HttpHeaders({
-      "client_id": "xzXNJFzxNtMvyLIFXCUL1005"
-    });
-    return this.http.post<any>(`${this.baseUrl}/customer/active`, payload, { headers });
+    return this.http.post<any>(`${this.baseUrl}/customer/active`, payload);
   }
 }

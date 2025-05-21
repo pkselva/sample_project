@@ -6,7 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './components/layout/layout.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CreatePartyComponent } from './components/create-party/create-party.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
 import { MatButtonModule } from '@angular/material/button'
@@ -24,6 +24,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserStatusDialogComponent } from './components/user-status-dialog/user-status-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AuthInterceptor } from './services/auth-interceptor'
 
 @NgModule({
   declarations: [
@@ -56,7 +57,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+  export class AppModule { }
