@@ -6,7 +6,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="partyCode">Party Code</label>
+                        <label class="text-xs" for="partyCode">Party Code*</label>
                         <p *ngIf="(partyCodeRef.touched || editPartyForm.submitted) && partyCodeRef.invalid && partyCodeRef.errors?.['required']"
                             style="color:red; margin:0; font-size: x-small;">
                             Party Code is Required*
@@ -19,7 +19,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="partyName">Party Name</label>
+                        <label class="text-xs" for="partyName">Party Name*</label>
                         <p *ngIf="(partyNameRef.touched || editPartyForm.submitted) &&partyNameRef.invalid  && partyNameRef.errors?.['required']"
                             style="color:red; margin:0; font-size: x-small;">
                             Party Name is Required*
@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="partyEmail">Email Address</label>
+                        <label class="text-xs" for="partyEmail">Email Address*</label>
                         <p *ngIf="(partyEmailRef.touched || editPartyForm.submitted) && partyEmailRef.invalid && partyEmailRef.errors?.['required']"
                             style="color:red; margin:0; font-size: x-small;">
                             Party Email is Required*
@@ -45,7 +45,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="partyMobile">Mobile Number</label>
+                        <label class="text-xs" for="partyMobile">Mobile Number*</label>
                         <div class="text-red-500 text-[10px] m-0 space-y-0">
                             <p
                                 *ngIf="(partyMobileRef.touched || editPartyForm.submitted) && partyMobileRef.invalid && partyMobileRef.errors?.['required']">

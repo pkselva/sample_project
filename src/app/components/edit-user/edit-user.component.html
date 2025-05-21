@@ -6,7 +6,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="firstName">First Name</label>
+                        <label class="text-xs" for="firstName">First Name*</label>
                         <p *ngIf="(firstNameRef.touched || updateForm.submitted) && firstNameRef.invalid && firstNameRef.errors?.['required']"
                             style="color:red; margin:0; font-size: x-small;">
                             First Name is Required*
@@ -18,7 +18,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="lastName">Last Name</label>
+                        <label class="text-xs" for="lastName">Last Name*</label>
                         <p *ngIf="(lastNameRef.touched || updateForm.submitted) && lastNameRef.invalid && lastNameRef.errors?.['required']"
                             style="color:red; margin:0; font-size: x-small;">
                             Last Name is Required*
@@ -30,7 +30,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="userId">User ID</label>
+                        <label class="text-xs" for="userId">User ID*</label>
                         <p *ngIf="(userIdRef.touched || updateForm.submitted) && userIdRef.invalid && userIdRef.errors?.['required']"
                             style="color:red; margin:0; font-size: x-small;">
                             User ID is Required*
@@ -42,7 +42,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="userEmail">Email Address</label>
+                        <label class="text-xs" for="userEmail">Email Address*</label>
                         <p *ngIf="(userEmailRef.touched || updateForm.submitted) && userEmailRef.invalid && userEmailRef.errors?.['required']"
                             style="color:red; margin:0; font-size: x-small;">
                             User Email is Required*
@@ -54,7 +54,7 @@
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex justify-between">
-                        <label class="text-xs" for="partyMobile">Mobile Number</label>
+                        <label class="text-xs" for="partyMobile">Mobile Number*</label>
                         <div class="text-red-500 text-[10px] m-0 space-y-0">
                             <p *ngIf="(userMobileRef.touched || updateForm.submitted) && userMobileRef.invalid && userMobileRef.errors?.['required']">
                                 Mobile Number is Required*
