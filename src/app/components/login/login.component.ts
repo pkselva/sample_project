@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   orgCode = '';
   loginId = '';
@@ -23,6 +23,14 @@ export class LoginComponent {
   private _snackBar = inject(MatSnackBar);
 
   constructor(private apiService: ApiService, private router: Router) { }
+
+  ngOnInit(): void {
+    const getToken = localStorage.getItem('token');
+
+    if (getToken) {
+      this.router.navigate(['dashboard']);
+    }
+  }
 
   onSubmit(loginForm: NgForm) {
 
