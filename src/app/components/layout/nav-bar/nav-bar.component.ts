@@ -15,12 +15,6 @@ export class NavBarComponent {
   faEllipsisVertical = faEllipsisVertical;
   private _snackBar = inject(MatSnackBar);
 
-  token = localStorage.getItem('token')
-
-  getToken = {
-    apiAccessSessionToken: `Bearer ${this.token}`
-  }
-
   @Output() isSidebarOpen = new EventEmitter<any>();
 
   sidebarState: boolean = false;
@@ -34,7 +28,7 @@ export class NavBarComponent {
 
   onSignOut() {
 
-    this.apiservice.logout(this.getToken).subscribe({
+    this.apiservice.logout().subscribe({
       next: (res) => {
         console.log(res);
         localStorage.removeItem('token');
@@ -53,7 +47,7 @@ export class NavBarComponent {
 
   onAuth() {
 
-    this.apiservice.authorize(this.getToken).subscribe({
+    this.apiservice.authorize().subscribe({
       next: (res) => {
         console.log(res);
       },

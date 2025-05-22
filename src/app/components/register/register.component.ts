@@ -27,18 +27,12 @@ export class RegisterComponent {
     if (this.orgCode.trim().length === 0 || this.loginId.trim().length === 0 || this.keyword.trim().length === 0) {
       this.error = "All Fields are Required"
     }
-    else if(this.keyword !== this.confirmKeyword){
+    else if (this.keyword !== this.confirmKeyword) {
       this.error = "Password do not match"
     }
     else if (registerForm.valid) {
-      const data = {
-        orgCode: this.orgCode,
-        loginId: this.loginId,
-        keyword: this.keyword,
-        confirmKeyword: this.confirmKeyword,
-      };
 
-      this.apiService.login(data).subscribe({
+      this.apiService.login(this.orgCode, this.loginId, this.keyword).subscribe({
         next: (res) => {
           alert("Login Successfully!");
           let withOutBearer = res.session.apiAccessSessionToken.split(" ")[1];
@@ -55,5 +49,5 @@ export class RegisterComponent {
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
-  }  
+  }
 }

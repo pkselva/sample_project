@@ -36,20 +36,8 @@ export class DashboardComponent {
   }
 
   fetchUsers() {
-    const payload = {
-      entityTypeCode: "API_GW_PARTY",
-      filters: [],
-      pagination: {
-        pageSize: 1000,
-        pageIndex: 0
-      },
-      sorting: {
-        key: "createdOn",
-        value: "asc"
-      }
-    }
 
-    this.apiService.getUsers(payload).subscribe({
+    this.apiService.getUsers().subscribe({
       next: (res) => {
         this.userDataSource = res.usersList || [];
         this.userLength = res.totalCount;
@@ -61,7 +49,7 @@ export class DashboardComponent {
       }
     });
 
-    this.apiService.getParties(payload).subscribe({
+    this.apiService.getParties().subscribe({
       next: (res) => {
         this.partyDataSource = res.partiesList;
         this.partyLength = res.totalCount;

@@ -28,13 +28,8 @@ export class LoginComponent {
 
     console.log(loginForm)
     if (loginForm.valid) {
-      const data = {
-        orgCode: this.orgCode,
-        loginId: this.loginId,
-        keyword: this.keyword,
-      };
 
-      this.apiService.login(data).subscribe({
+      this.apiService.login(this.orgCode, this.loginId, this.keyword).subscribe({
         next: (res) => {
           let withOutBearer = res.session.apiAccessSessionToken.split(" ")[1];
           localStorage.setItem('token', withOutBearer || '');

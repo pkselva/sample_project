@@ -57,20 +57,8 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   }
 
   fetchUsers() {
-    const payload = {
-      entityTypeCode: "API_GW_PARTY",
-      filters: [],
-      pagination: {
-        pageSize: 1000,
-        pageIndex: 0
-      },
-      sorting: {
-        key: "createdOn",
-        value: "asc"
-      }
-    }
 
-    this.apiService.getUsers(payload).subscribe({
+    this.apiService.getUsers().subscribe({
       next: (res) => {
         this.userList.data = res.usersList;
         this.length = res.totalCount;

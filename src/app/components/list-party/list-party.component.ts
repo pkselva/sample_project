@@ -55,20 +55,8 @@ ngOnInit(): void {
 }
 
 fetchParties() {
-  const payload = {
-    entityTypeCode: "API_GW_PARTY",
-    filters: [],
-    pagination: {
-      pageSize: 1000,
-      pageIndex: 0
-    },
-    sorting: {
-      key: "createdOn",
-      value: "asc"
-    }
-  }
 
-  this.apiService.getParties(payload).subscribe({
+  this.apiService.getParties().subscribe({
     next: (res) => {
       this.partyList.data = res.partiesList;
       this.length = res.totalCount;
