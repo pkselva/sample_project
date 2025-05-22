@@ -1,4 +1,4 @@
-<div class="lg:mx-20">
+<!-- <div class="lg:mx-20">
     <h1 class="text-xl text-sky-800 font-medium my-5">Party &amp; User Registeration</h1>
     <form #onboardingForm="ngForm" (ngSubmit)="onSubmit(onboardingForm)" class="flex flex-col gap-5 text-gray-500">
         <div class="p-10 bg-sky-50 shadow rounded-xl">
@@ -136,6 +136,169 @@
             <button type="submit"
                 class="px-10 py-2 hover:bg-sky-500 rounded-full hover:cursor-pointer text-white bg-sky-300 "
                 >Submit</button>
+        </div>
+    </form>
+</div> -->
+
+<form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5 text-gray-500">
+    <div class="p-10 bg-sky-50 shadow rounded-xl">
+        <h1 class="mb-3 text-sky-800 text-shadow-md font-medium">Party Information</h1>
+        <div class="flex flex-col gap-1">
+            <div class="flex justify-between">
+                <label class="text-xs" for="partyName">Party Name*</label>
+            </div>
+            <input type="text" name="partyName" formControlName="partyName" required
+                class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+        </div>
+        <div class="flex flex-col gap-1">
+            <div class="flex justify-between">
+                <label class="text-xs" for="partyEmail">Email Address*</label>
+            </div>
+            <input type="email" name="partyEmail" formControlName="partyEmail" required
+                class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white">
+        </div>
+    </div>
+</form>
+
+
+<div class="lg:mx-20">
+    <h1 class="text-xl text-sky-800 font-medium my-5">Party &amp; User Registeration</h1>
+    <form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5 text-gray-500">
+        <div class="p-10 bg-sky-50 shadow rounded-xl">
+            <h1 class="mb-3 text-sky-800 text-shadow-md font-medium">Party Information</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="partyCode">Party Code*</label>
+                        <p *ngIf="(onboardingForm.controls['partyCode'].touched || submitted) && onboardingForm.controls['partyCode'].invalid && onboardingForm.controls['partyCode'].errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            Party Code is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="partyCode" formControlName="partyCode" required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['partyCode'].invalid && onboardingForm.controls['partyCode'].touched,'focus:ring-blue-500': !(onboardingForm.controls['partyCode'].invalid && onboardingForm.controls['partyCode'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="partyName">Party Name*</label>
+                        <p *ngIf="(onboardingForm.controls['partyName'].touched || submitted) &&onboardingForm.controls['partyName'].invalid  && onboardingForm.controls['partyName'].errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            Party Name is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="partyName" formControlName="partyName" required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['partyName'].invalid && onboardingForm.controls['partyName'].touched,'focus:ring-blue-500': !(onboardingForm.controls['partyName'].invalid && onboardingForm.controls['partyName'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="partyEmail">Email Address*</label>
+                        <p *ngIf="(onboardingForm.controls['partyEmail'].touched || submitted) && onboardingForm.controls['partyEmail'].invalid && onboardingForm.controls['partyEmail'].errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            Party Email is Required*
+                        </p>
+                    </div>
+                    <input type="email" name="partyEmail" formControlName="partyEmail" required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['partyEmail'].invalid && onboardingForm.controls['partyEmail'].touched,'focus:ring-blue-500': !(onboardingForm.controls['partyEmail'].invalid && onboardingForm.controls['partyEmail'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="partyMobile">Mobile Number*</label>
+                        <div class="text-red-500 text-[10px] m-0 space-y-0">
+                            <p
+                                *ngIf="(onboardingForm.controls['partyMobile'].touched || submitted) && onboardingForm.controls['partyMobile'].invalid && onboardingForm.controls['partyMobile'].errors?.['required']">
+                                Mobile Number is Required*
+                            </p>
+                            <p
+                                *ngIf="(onboardingForm.controls['partyMobile'].touched || submitted) && onboardingForm.controls['partyMobile'].invalid && (onboardingForm.controls['partyMobile'].errors?.['minlength'] || onboardingForm.controls['partyMobile'].errors?.['maxlength'])">
+                                Mobile No. Should be 10 Digits*
+                            </p>
+                        </div>
+                    </div>
+                    <input type="text" id="partyMobile" name="partyMobile" formControlName="partyMobile" required
+                        minlength="10" maxlength="10"
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['partyMobile'].invalid && onboardingForm.controls['partyMobile'].touched,'focus:ring-blue-500': !(onboardingForm.controls['partyMobile'].invalid && onboardingForm.controls['partyMobile'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+            </div>
+        </div>
+        <div class="p-10 bg-sky-50 shadow rounded-xl">
+            <h1 class="mb-3 text-sky-800 text-shadow-md font-medium">User Information</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="firstName">First Name*</label>
+                        <p *ngIf="(onboardingForm.controls['firstName'].touched || submitted) && onboardingForm.controls['firstName'].invalid && onboardingForm.controls['firstName'].errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            First Name is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="firstName" formControlName="firstName" required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['firstName'].invalid && onboardingForm.controls['firstName'].touched,'focus:ring-blue-500': !(onboardingForm.controls['firstName'].invalid && onboardingForm.controls['firstName'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="lastName">Last Name*</label>
+                        <p *ngIf="(onboardingForm.controls['lastName'].touched || submitted) && onboardingForm.controls['lastName'].invalid && onboardingForm.controls['lastName'].errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            Last Name is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="lastName" formControlName="lastName" required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['lastName'].invalid && onboardingForm.controls['lastName'].touched,'focus:ring-blue-500': !(onboardingForm.controls['lastName'].invalid && onboardingForm.controls['lastName'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="userId">User ID*</label>
+                        <p *ngIf="(onboardingForm.controls['userId'].touched || submitted) && onboardingForm.controls['userId'].invalid && onboardingForm.controls['userId'].errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            User ID is Required*
+                        </p>
+                    </div>
+                    <input type="text" name="userId" formControlName="userId" required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['userId'].invalid && onboardingForm.controls['userId'].touched,'focus:ring-blue-500': !(onboardingForm.controls['userId'].invalid && onboardingForm.controls['userId'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="userEmail">Email Address*</label>
+                        <p *ngIf="(onboardingForm.controls['userEmail'].touched || submitted) && onboardingForm.controls['userEmail'].invalid && onboardingForm.controls['userEmail'].errors?.['required']"
+                            style="color:red; margin:0; font-size: x-small;">
+                            User Email is Required*
+                        </p>
+                    </div>
+                    <input type="email" name="userEmail" formControlName="userEmail" required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['userEmail'].invalid && onboardingForm.controls['userEmail'].touched,'focus:ring-blue-500': !(onboardingForm.controls['userEmail'].invalid && onboardingForm.controls['userEmail'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between">
+                        <label class="text-xs" for="partyMobile">Mobile Number*</label>
+                        <div class="text-red-500 text-[10px] m-0 space-y-0">
+                            <p
+                                *ngIf="(onboardingForm.controls['userMobile'].touched || submitted) && onboardingForm.controls['userMobile'].invalid && onboardingForm.controls['userMobile'].errors?.['required']">
+                                Mobile Number is Required*
+                            </p>
+                            <p
+                                *ngIf="(onboardingForm.controls['userMobile'].touched || submitted) && onboardingForm.controls['userMobile'].invalid && (onboardingForm.controls['userMobile'].errors?.['minlength'] || onboardingForm.controls['userMobile'].errors?.['maxlength'])">
+                                Mobile No. Should be 10 Digits*
+                            </p>
+                        </div>
+                    </div>
+                    <input type="text" name="userMobile" formControlName="userMobile" minlength="10" maxlength="10"
+                        required
+                        [ngClass]="{'ring-red-500 ring-2': onboardingForm.controls['userMobile'].invalid && onboardingForm.controls['userMobile'].touched,'focus:ring-blue-500': !(onboardingForm.controls['userMobile'].invalid && onboardingForm.controls['userMobile'].touched)}"
+                        class="shadow md:p-2 p-1 rounded border border-gray-50 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+        </div>
+        <div class="flex w-full justify-center">
+            <button type="submit"
+                class="px-10 py-2 hover:bg-sky-500 rounded-full hover:cursor-pointer text-white bg-sky-300 ">Submit</button>
         </div>
     </form>
 </div>

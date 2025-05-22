@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -9,27 +9,49 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './create-party.component.html',
   styleUrl: './create-party.component.css'
 })
-export class CreatePartyComponent {
-  partyCode = "";
-  partyName = "";
-  partyEmail = "";
-  partyMobile = "";
-  userId = "";
-  firstName = "";
-  lastName = "";
-  userEmail = "";
-  userMobile = "";
+export class CreatePartyComponent implements OnInit {
+  // partyCode = "";
+  // partyName = "";
+  // partyEmail = "";
+  // partyMobile = "";
+  // userId = "";
+  // firstName = "";
+  // lastName = "";
+  // userEmail = "";
+  // userMobile = "";
+
+  onboardingForm!: FormGroup<any>;
+
+  submitted = false;
 
   private _snackBar = inject(MatSnackBar);
 
   constructor(private apiService: ApiService) { }
 
-  onSubmit(onboardingForm: NgForm) {
+  ngOnInit(): void {
+    this.onboardingForm = new FormGroup({
+      partyCode: new FormControl(null, Validators.required),
+      partyName: new FormControl(null, Validators.required),
+      partyEmail: new FormControl(null, Validators.required),
+      partyMobile: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      userId: new FormControl(null, Validators.required),
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      userEmail: new FormControl(null, Validators.required),
+      userMobile: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+    })
+  }
 
-    console.log(onboardingForm.value)
+  onSubmit() {
 
-    if (onboardingForm.valid) {
-      const formValues = onboardingForm.value;
+    this.submitted = true;
+
+    console.log(this.submitted)
+
+    console.log(this.onboardingForm)
+
+    if (this.onboardingForm.valid) {
+      const formValues = this.onboardingForm.value;
 
       const payload = {
         partyData: {
@@ -53,7 +75,8 @@ export class CreatePartyComponent {
         next: (res) => {
           console.log(res);
           this._snackBar.open(res.message, 'Close', { duration: 2000 });
-          onboardingForm.onReset();
+          this.onboardingForm.reset();
+          this.submitted = false;
         },
         error: (err) => {
           console.log(err);
@@ -68,6 +91,9 @@ export class CreatePartyComponent {
           }
         }
       })
+    }
+    else{
+      this.onboardingForm.markAllAsTouched();
     }
   }
 
