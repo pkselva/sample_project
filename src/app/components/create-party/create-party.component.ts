@@ -20,7 +20,7 @@ export class CreatePartyComponent implements OnInit {
   // userEmail = "";
   // userMobile = "";
 
-  onboardingForm!: FormGroup<any>;
+  onboardingForm!: FormGroup;
 
   submitted = false;
 
